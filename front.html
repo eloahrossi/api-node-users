@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    
+    <p>Nome</p>
+    <input type="text" id="nome">
+    <p>Autor</p>
+    <input type="text" id="autor">
+    <p>Genero</p>
+    <input type="text" id="genero">
+    <p>Classificacao</p>
+    <input type="text" id="classificacao">
+
+    <button onclick="criarLivro()">
+        Cadastrar
+    </button>
+
+    <p id="livro"></p>
+
+    <script>
+        async function pegarLivros () {
+            const resposta = await fetch('http://localhost:3333/livros', {
+                method: 'GET'
+            });
+
+            const livros = await resposta.json();
+            console.log(livros);
+            const livro = document.getElementById('livro')
+            livro.innerHTML = livros[0].nome
+            
+        }
+        pegarLivros();
+
+        async function criarLivro () {
+            const nome = document.getElementById('nome').value;
+            const autor = document.getElementById('autor').value;
+            const genero = document.getElementById('genero').value;
+            const classificacao = document.getElementById('classificacao').value;
+
+
+            const livro = {
+                "nome": nome,
+                "autor": autor,
+                "genero": genero,
+                "classificacao": classificacao
+            }
+            const resposta = await fetch('http://localhost:3333/livros', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify(livro)
+            });
+            
+            await pegarLivros();
+
+        }
+  
+    </script>
+</body>
+</html>
