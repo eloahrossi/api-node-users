@@ -1,0 +1,33 @@
+#PARA UTILIZAR ESSES ENDPOINTS É NECESSÁRIO INSTALAR A EXTENSÃO DO VSCODE "REST CLIENT"
+###
+
+GET http://localhost:3333/livros
+
+###
+
+POST http://localhost:3333/livros
+Content-Type: application/json
+
+{
+    "nome": "declinio de um  homem",
+    "autor": "osamu dazai",
+    "genero": "ficção literaria",
+    "classificacao": "livre"
+  
+}
+
+###
+
+PUT http://localhost:3333/livros/470a048c-3634-4d5d-b6c3-1d6acbb89eb5
+Content-Type: application/json
+
+{
+    "nome": "declinio de um  mulher",
+    "autor": "osamu dazai",
+    "genero": "ficção literaria",
+    "classificacao": "livre"
+}
+
+###
+
+DELETE http://localhost:3333/livros/470a048c-3634-4d5d-b6c3-1d6acbb89eb5
